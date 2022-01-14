@@ -40,26 +40,18 @@ public class PostService {
 
 		// Forma 1 getForObject
 		Post post = restTemplate.getForObject(uri, Post.class, params);
-		System.out.println("------------------------------");
-		System.out.println(post);
 
 		// Forma 2 getForEntity passando params
 		ResponseEntity<Post> responseEntityPost = restTemplate.getForEntity(uri, Post.class, params);
 		post = responseEntityPost.getBody();
-		System.out.println("------------------------------");
-		System.out.println(post);
 
 		// Forma 3 getForEntity utilizando o varargs
 		ResponseEntity<Post> responseEntityPost2 = restTemplate.getForEntity(uri, Post.class, id);
 		post = responseEntityPost2.getBody();
-		System.out.println("------------------------------");
-		System.out.println(post);
 
 		// Forma 4 exchange utilizando o varargs
 		ResponseEntity<Post> responseEntityPost3 = restTemplate.exchange(uri, HttpMethod.GET, null, Post.class, params);
 		post = responseEntityPost3.getBody();
-		System.out.println("------------------------------");
-		System.out.println(post);
 		
 		return post;
 	}
@@ -68,8 +60,6 @@ public class PostService {
 		
 		// Forma 1 getForObject
 		post = restTemplate.postForObject(URI_BASE, post, Post.class);
-		System.out.println("------------------------------");
-		System.out.println(post);
 		
 		// Forma 2 exchange
 		ResponseEntity<Post> responseEntityPost = restTemplate.exchange(
@@ -78,8 +68,6 @@ public class PostService {
 				new HttpEntity<>(post, createJsonHeader()), 
 				Post.class);
 		post = responseEntityPost.getBody();
-		System.out.println("------------------------------");
-		System.out.println(post);
 		
 		return post;
 	}
@@ -99,13 +87,9 @@ public class PostService {
 				Post.class,
 				params);
 		post = responseEntityPost.getBody();
-		System.out.println("------------------------------");
-		System.out.println(post);
 		
 		// Forma 2 put
 		restTemplate.put(uri, responseEntityPost, params);
-		System.out.println("------------------------------");
-		System.out.println("Chamada restTemplate.put - void");
 		
 		return post;
 	}
@@ -124,14 +108,10 @@ public class PostService {
 			null, 
 			Void.class,
 			params);
-		System.out.println("------------------------------");
-		System.out.println(responseEntityPost);
 		
 		
 		// Forma 2 delete
 		restTemplate.delete(uri, params);
-		System.out.println("------------------------------");
-		System.out.println("Chamada restTemplate.delete - void");
 		
 	}
 	
